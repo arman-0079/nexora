@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-condensed: "Barlow Condensed", "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html,
+  body {
+    background-color: #050811;
+    color: #f1f5f9;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
+  }
+}
+
+/* 3D Card Flip Utilities (compositor-only transforms) */
+.card-perspective {
+  perspective: 1200px;
+}
+
+.card-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.card-backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+@keyframes shuffleShift {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-14px) rotate(-3deg);
+  }
+  50% {
+    transform: translateX(12px) rotate(2.5deg);
+  }
+  75% {
+    transform: translateX(-8px) rotate(-1.5deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+.animate-shuffle-card {
+  animation: shuffleShift 420ms cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes cardDrawReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-draw-reveal {
+  animation: cardDrawReveal 340ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slotCardLock {
+  0% {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slot-lock {
+  animation: slotCardLock 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes arenaEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-arena-enter {
+  animation: arenaEnter 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes victoryEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-victory-enter {
+  animation: victoryEnter 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes holoRingSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-holo-spin {
+  animation: holoRingSpin 36s linear infinite;
+}
+
+@keyframes holoRingSpinReverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-holo-spin-reverse {
+  animation: holoRingSpinReverse 48s linear infinite;
+}
+
+@keyframes particleDrift {
+  0%,
+  100% {
+    transform: translateY(0px);
+    opacity: 0.12;
+  }
+  50% {
+    transform: translateY(-18px);
+    opacity: 0.34;
+  }
+}
+
+.animate-particle-drift {
+  animation: particleDrift 7s ease-in-out infinite;
+}
+
+@keyframes rarityAuraPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.animate-rarity-aura {
+  animation: rarityAuraPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes mythicSweep {
+  0% {
+    transform: translateX(-140%) skewX(-22deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.28;
+  }
+  60% {
+    opacity: 0.18;
+  }
+  100% {
+    transform: translateX(220%) skewX(-22deg);
+    opacity: 0;
+  }
+}
+
+.animate-mythic-sweep {
+  animation: mythicSweep 4.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-shuffle-card,
+  .animate-draw-reveal,
+  .animate-slot-lock,
+  .animate-arena-enter,
+  .animate-victory-enter,
+  .animate-holo-spin,
+  .animate-holo-spin-reverse,
+  .animate-particle-drift,
+  .animate-rarity-aura,
+  .animate-mythic-sweep {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

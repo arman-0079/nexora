@@ -1,0 +1,8 @@
+{
+  "name": "Nexora Card Draft",
+  "description": "A minimalist 2-player tactical character card draft game with dual-sided character cards and power scoring.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
